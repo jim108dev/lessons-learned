@@ -12,6 +12,12 @@
     "body": ["```sh", "$0", "```", ""],
     "description": "Shell code block"
   },
+  "markdown-sql-code-block": {
+    "scope": "markdown",
+    "prefix": "sql",
+    "body": ["```sql", "$0", "```", ""],
+    "description": "SQL code block"
+  },
   "markdown-purescript-code-block": {
     "scope": "markdown",
     "prefix": "ps",

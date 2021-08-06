@@ -12,7 +12,8 @@
   "explorer.confirmDragAndDrop": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "files.associations": {
-    "**/files/**/*": "plaintext"
+    "**/files/**/*": "plaintext",
+    ".gmrc": "jsonc"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.userWords": [
@@ -20,20 +21,28 @@
     "Bifunctor",
     "Dotenv",
     "Eagery",
+    "Flexbox",
+    "Followees",
+    "Graphile",
     "Plainionist",
     "Postgres",
     "Queryable",
+    "Selda",
     "Semigroup",
     "Serializability",
     "Steyer",
     "Typegoose",
     "bimap",
+    "collatz",
     "concat",
     "cqrs",
     "deinit",
     "dtos",
     "esbenp",
+    "eval",
     "favorited",
+    "foldl",
+    "foldr",
     "followee",
     "forall",
     "lmap",
@@ -48,6 +57,8 @@
     "ngrx",
     "nrwl",
     "pipeable",
+    "postgraphile",
+    "prettierignore",
     "prettierrc",
     "purescript",
     "purs",
@@ -56,8 +67,11 @@
     "submodule",
     "submodules",
     "typeorm",
+    "uncommenting",
+    "uncons",
     "unfollow",
     "unformat",
+    "unnest",
     "unprocessable",
     "websockets"
   ],
@@ -85,18 +99,19 @@
     "**/.vscode/**",
     "**/dist/**",
     "**/.spago/**",
-    "**/.psci_modules/**"
+    "**/.psci_modules/**",
+    "**/build/**"
   ],
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
   "npm-intellisense.showBuildInLibs": true,
   "typescript.preferences.quoteStyle": "single",
   "prettier.singleQuote": true,
   "files.exclude": {
     "**/*.spec.ts": true,
     "**/node_modules": true,
-    "**/output": true
+    "**/output": true,
+    "**/build": true,
+    "**/*.pyc": true,
+    "**/__pycache__":true,
   },
   "search.exclude": {
     ".spago": true,
@@ -112,65 +127,36 @@
       "delayMode": "default",
       "payloadFormat": "default",
       "linePattern": "{line}",
-      "noSelectionPayload": [
-        "{currentline}"
-      ],
-      "oneLineSelectionPayload": [
-        "{selection}"
-      ],
-      "multiLineSelectionPayload": [
-        "{selection}"
-      ]
+      "noSelectionPayload": ["{currentline}"],
+      "oneLineSelectionPayload": ["{selection}"],
+      "multiLineSelectionPayload": ["{selection}"]
     },
     {
       "langId": "purescript",
       "delayMode": "default",
       "payloadFormat": "chunk",
       "linePattern": "{line}",
-      "noSelectionPayload": [
-        "{currentline}"
-      ],
-      "oneLineSelectionPayload": [
-        "{selection}"
-      ],
-      "multiLineSelectionPayload": [
-        ":paste",
-        "{selection}",
-        "\u0004"
-      ]
+      "noSelectionPayload": ["{currentline}"],
+      "oneLineSelectionPayload": ["{selection}"],
+      "multiLineSelectionPayload": [":paste", "{selection}", "\u0004"]
     },
     {
       "langId": "haskell",
       "delayMode": "default",
       "payloadFormat": "chunk",
       "linePattern": "{line}",
-      "noSelectionPayload": [
-        "{currentline}"
-      ],
-      "oneLineSelectionPayload": [
-        "{selection}"
-      ],
-      "multiLineSelectionPayload": [
-        ":{",
-        "{selection}",
-        ":}"
-      ]
+      "noSelectionPayload": ["{currentline}"],
+      "oneLineSelectionPayload": ["{selection}"],
+      "multiLineSelectionPayload": [":{", "{selection}", ":}"]
     },
     {
       "langId": "python",
       "delayMode": "default",
       "payloadFormat": "chunk",
       "linePattern": "{line}",
-      "noSelectionPayload": [
-        "{currentline}"
-      ],
-      "oneLineSelectionPayload": [
-        "{selection}"
-      ],
-      "multiLineSelectionPayload": [
-        "{selection}",
-        ""
-      ]
+      "noSelectionPayload": ["{currentline}"],
+      "oneLineSelectionPayload": ["{selection}"],
+      "multiLineSelectionPayload": ["{selection}", ""]
     }
   ],
   "cSpell.enabledLanguageIds": [
@@ -209,9 +195,7 @@
     "yml",
     "purescript"
   ],
-  "cSpell.enableFiletypes": [
-    "!typescript"
-  ],
+  "cSpell.enableFiletypes": ["!typescript"],
   "files.watcherExclude": {
     "**/.output/**": true,
     "**/.spago/**": true
@@ -219,11 +203,40 @@
   "window.zoomLevel": 0,
   "sqltools.queryParams.enableReplace": true,
   "sql-formatter.uppercase": true,
-  "[sql]": {
-    "editor.defaultFormatter": "bradymholt.pgformatter"
-  },
   "pgFormatter.spaces": 2,
   "vscode-mysql.enableDelimiter": true,
   "search.searchOnType": false,
- 
+  "database-client.disableSqlCodeLen": true,
+  "macros.list": {
+    "deletePrefix": ["deleteLeft", "deleteLeft", "deleteLeft", "deleteLeft"]
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "brittany.path": "/home/a/.local/bin/brittany",
+  "haskell.hlint.executablePath": "/home/a/.local/bin/hlint",
+  "[haskell]": {
+    "editor.defaultFormatter": "MaxGabriel.brittany"
+  },
+  "terminal.integrated.inheritEnv": true,
+  "[json]": {
+    "editor.quickSuggestions": {
+      "strings": true
+    },
+    "editor.suggest.insertMode": "replace"
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "extensions.ignoreRecommendations": true,
+  "rainbow_csv.autodetect_separators": ["\t", ";", "|"],
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+  },
+  "editor.wordBasedSuggestions": false,
+  "editor.suggest.insertMode": "replace",
+  "editor.semanticHighlighting.enabled": true
 }

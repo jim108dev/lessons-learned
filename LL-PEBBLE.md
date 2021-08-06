@@ -7,6 +7,9 @@ This is a learning project in order to summarize the insides gained from several
     - [SDK](#sdk)
     - [Add to Fish PATH](#add-to-fish-path)
   - [VS Code Extensions](#vs-code-extensions)
+    - [Build and deploy](#build-and-deploy)
+  - [C quirks and features](#c-quirks-and-features)
+    - [Local variables](#local-variables)
 
 ## Working environment
 
@@ -69,6 +72,22 @@ echo $PATH
 
 ## Development
 
+### Pair
+
+1. Delete existing pair devices on the watch.
+
+1. Pair from the laptop:
+
+  ```sh
+  bluetoothctl
+  scan on
+  #[NEW] Device B0:B4:48:93:68:71 Pebble 6871
+  remove B0:B4:48:93:68:71
+  pair B0:B4:48:93:68:71
+  #yes
+  sudo rfcomm bind 0 B0:B4:48:93:68:71 1
+  ```
+  
 ### Build and deploy
 
 ```sh
@@ -78,3 +97,24 @@ pebble install --emulator=aplite
 # On the device
 pebble install --serial /dev/rfcomm0
 ```
+
+## C quirks and features
+
+### Local variables
+
+1. Allays you `malloc` to initialize arrays. Don't do:
+
+  ```c
+    success((Record[]){
+              {.id = 1,
+               .question = "Mock Question",
+               .answer = "Mock Answer",
+               .choice = 0,
+               .last_tested = 50 * 3 * 10 ^ 7},
+              ...
+          },
+          2);
+  ```
+
+  The same applies to char arrays. **"Arrays are always passed by reference in C."** See [(Germain)](https://www.cs.utah.edu/~germain/PPS/Topics/C_Language/c_functions.html).
+  
